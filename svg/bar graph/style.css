@@ -1,0 +1,19 @@
+#svg {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #ccc;
+}
+
+.pillar {
+  fill: #5b79d6;
+}
+
+.pillar rect:hover {
+  cursor: pointer;
+  fill: #5c7db9;
+}
+
+.pillar rect.bg {
+  fill: #ccc;
+  opacity: 0.5;
+}
