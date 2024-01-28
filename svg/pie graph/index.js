@@ -91,59 +91,56 @@ data.forEach((item, i) => {
   }
   g.appendChild(text);
 
-  // 鼠标移入时高亮
-  const panel = document.querySelector("#data-panel");
-  svg.onmouseover = function (e) {
-    if (
-      e.target.parentNode.tagName === "g" &&
-      e.target.parentNode.classList.contains("part")
-    ) {
-      // 展示文字
-      const text = e.target.parentNode.getAttribute("text");
-      const value = e.target.parentNode.getAttribute("value");
-      const curDeg = e.target.parentNode.getAttribute("curDeg");
-      const lastDeg = e.target.parentNode.getAttribute("lastDeg");
-      function show(e) {
-        panel.innerHTML = `${text}: ${value}`;
-        panel.style.left = e.clientX + 10 + "px";
-        panel.style.top = e.clientY + 5 + "px";
-        panel.style.display = "block";
-      }
-      show(e);
-
-      function drawArc(origin, r, curDeg, lastDeg) {
-        console.log('🚀 ~ drawArc ~ lastDeg:', lastDeg)
-        console.log('🚀 ~ drawArc ~ curDeg:', curDeg)
-        console.log('🚀 ~ drawArc ~ origin', origin)
-        const startPoint = calcPoint(origin, r, lastDeg);
-        const endPoint = calcPoint(
-          origin,
-          r,
-          parseFloat(curDeg) + parseFloat(lastDeg)
-          // curDeg + lastDeg
-        );
-        const flag = curDeg >= 180 ? 1 : 0;
-        let d = "";
-        d += `M${origin.x + 25} ${origin.y + 25} `;
-        d += `L${startPoint.x + 25} ${startPoint.y + 25} `;
-        d += `A${r} ${r} 0 ${flag} 1 ${endPoint.x + 25} ${endPoint.y + 25} Z`;
-        path.setAttribute("d", d);
-      }
-      // drawArc(originPoint, r3, curDeg, lastDeg);
-
-      e.target.onmousemove = function (e) {
-        show(e);
-      };
-
-      e.target.onmouseout = function () {
-        panel.style.display = "none";
-        // drawArc(originPoint, r1, curDeg, lastDeg);
-        this.onmousemove = null;
-        this.onmouseout = null;
-      };
-    }
-  };
-
   startPoint = endPoint;
   lastDeg += curDeg;
 });
+
+const panel = document.querySelector("#data-panel");
+svg.onmouseover = function (e) {
+  if (
+    e.target.parentNode.tagName === "g" &&
+    e.target.parentNode.classList.contains("part")
+  ) {
+    // 展示文字
+    const text = e.target.parentNode.getAttribute("text");
+    const value = e.target.parentNode.getAttribute("value");
+    const curDeg = e.target.parentNode.getAttribute("curDeg");
+    const lastDeg = e.target.parentNode.getAttribute("lastDeg");
+    const path = e.target.parentNode.querySelector("path");
+    function show(e) {
+      panel.innerHTML = `${text}: ${value}`;
+      panel.style.left = e.clientX + 10 + "px";
+      panel.style.top = e.clientY + 5 + "px";
+      panel.style.display = "block";
+    }
+    show(e);
+
+    function drawArc(origin, r, curDeg, lastDeg) {
+      const startPoint = calcPoint(origin, r, lastDeg);
+      const endPoint = calcPoint(
+        origin,
+        r,
+        parseFloat(curDeg) + parseFloat(lastDeg)
+        // curDeg + lastDeg
+      );
+      const flag = curDeg >= 180 ? 1 : 0;
+      let d = "";
+      d += `M${origin.x + 25} ${origin.y + 25} `;
+      d += `L${startPoint.x + 25} ${startPoint.y + 25} `;
+      d += `A${r} ${r} 0 ${flag} 1 ${endPoint.x + 25} ${endPoint.y + 25} Z`;
+      path.setAttribute("d", d);
+    }
+    drawArc(originPoint, r3, curDeg, lastDeg);
+
+    e.target.onmousemove = function (e) {
+      show(e);
+    };
+
+    e.target.onmouseout = function () {
+      panel.style.display = "none";
+      drawArc(originPoint, r1, curDeg, lastDeg);
+      this.onmousemove = null;
+      this.onmouseout = null;
+    };
+  }
+};
