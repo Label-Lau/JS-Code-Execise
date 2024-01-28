@@ -38,5 +38,30 @@ values.forEach((value, i) => {
   rect2.setAttribute("y", 225 - value * result.ratio);
   rect2.setAttribute("width", result.xSpace / 2);
   rect2.setAttribute("height", value * result.ratio);
+  rect2.setAttribute("value", value);
   g.appendChild(rect2);
 });
+
+// 数据展示
+const panel = document.querySelector("#data-panel");
+svg.onmouseover = function (e) {
+  if (e.target.tagName === "rect" && !e.target.classList.contains("bg")) {
+    console.log(e.target);
+    function show(e) {
+      panel.innerHTML = e.target.getAttribute("value");
+      panel.style.left = e.clientX + 10 + "px";
+      panel.style.top = e.clientY + 10 + "px";
+      panel.style.display = "block";
+    }
+    show(e);
+    e.target.onmousemove = function (e) {
+      show(e);
+    };
+
+    e.target.onmouseout = function (e) {
+      panel.style.display = "none";
+      this.onmousemove = null;
+      this.onmouseout = null;
+    };
+  }
+};
