@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 线性渐变 -->
+    <svg id="svg" viewBox="0 0 100 100" width="400" height="400">
+      <defs>
+        <linearGradient
+          id="gradient1"
+          x1="0%"
+          x2="40%"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stop-color="#f00" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ff0" stop-opacity="1" />
+        </linearGradient>
+      </defs>
+      <rect x="10" y="10" width="80" height="40" fill="url(#gradient1)" />
+    </svg>
+
+    <svg id="svg" viewBox="0 0 100 100" width="400" height="400">
+      <defs>
+        <linearGradient id="gradient2" x1="30%" x2="70%">
+          <stop offset="0%" stop-color="#f00" stop-opacity="1" />
+          <stop offset="50%" stop-color="#0f0" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ff0" stop-opacity="1" />
+        </linearGradient>
+      </defs>
+      <rect x="10" y="10" width="80" height="40" fill="url(#gradient2)" />
+    </svg>
+
+    <!-- 径向渐变 -->
+    <svg id="svg" viewBox="0 0 100 100" width="400" height="400">
+      <defs>
+        <radialGradient
+          id="gradient3"
+          cx="50%"
+          cy="50%"
+          r="10%"
+          fx="50%"
+          fy="50%"
+          spreadMethod="reflect"
+        >
+          <stop offset="0" stop-color="#ff0" />
+          <stop offset="100%" stop-color="#f00" />
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="40" fill="url(#gradient3)" />
+    </svg>
+
+    <!-- 渐变引用 -->
+    <svg viewBox="0 0 100 100" width="400" height="400">
+      <defs>
+        <radialGradient id="gradient6" fr="15%" r="30%" spreadMethod="repeat">
+          <stop offset="0%" stop-color="#ff0" stop-opacity="1" />
+          <stop offset="100%" stop-color="#f00" stop-opacity="0.5" />
+        </radialGradient>
+
+        <radialGradient
+          id="gradient7"
+          fr="15%"
+          r="30%"
+          spreadMethod="reflect"
+          href="#gradient6"
+        />
+      </defs>
+      <circle cx="25" cy="25" r="25" fill="url(#gradient6)" />
+      <circle cx="75" cy="75" r="25" fill="url(#gradient7)" />
+    </svg>
+
+    <!-- 引用的是颜色的渐变过程，与哪种渐变方式无关 -->
+    <svg viewBox="0 0 100 100" width="400" height="400">
+      <defs>
+        <radialGradient id="gradient3" fr="15%" r="30%" spreadMethod="repeat">
+          <stop offset="0%" stop-color="#ff0" stop-opacity="1" />
+          <stop offset="100%" stop-color="#f00" stop-opacity="0.5" />
+        </radialGradient>
+        <linearGradient
+          id="gradient4"
+          x1="40%"
+          x2="60%"
+          spreadMethod="repeat"
+          href="#gradient3"
+        />
+      </defs>
+      <rect x="20" y="60" width="60" height="30" fill="url(#gradient3)" />
+      <circle cx="30" cy="30" r="25" fill="url(#gradient4)" />
+    </svg>
+
+    <script src="../utils/fullCoord.js" type="module"></script>
+  </body>
+</html>
