@@ -69,7 +69,7 @@
           from="30"
           to="60"
           dur="1s"
-          begin="btn2.mouseover"
+          begin="btn2.mouseenter"
         />
       </circle>
       <g id="btn2" style="cursor: pointer">
@@ -84,6 +84,103 @@
         />
         <text x="50" y="67" font-size="6" text-anchor="middle">移入</text>
       </g>
+    </svg>
+    <!-- id.end -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <rect x="20" y="20" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a31"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          fill="freeze"
+        />
+      </rect>
+      <rect x="40" y="30" width="0" height="10" style="fill: #f00">
+        <animate
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          begin="a31.end"
+          fill="freeze"
+        />
+      </rect>
+    </svg>
+    <!-- 死循环 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <rect x="20" y="20" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a41"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          begin="0s;a42.end"
+          fill="freeze"
+        />
+      </rect>
+      <rect x="40" y="30" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a42"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          begin="a41.end"
+          fill="freeze"
+        />
+      </rect>
+    </svg>
+    <!-- 控制某一个动画执行指定次数后，当前动画开始 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <rect x="20" y="20" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a51"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          fill="freeze"
+          repeatCount="3"
+        />
+      </rect>
+      <rect x="40" y="30" width="0" height="10" style="fill: #f00">
+        <animate
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          begin="a51.repeat(2)"
+          fill="freeze"
+        />
+      </rect>
+    </svg>
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <rect x="20" y="20" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a61"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="2s"
+          fill="freeze"
+          repeatCount="1"
+        />
+      </rect>
+      <rect x="40" y="30" width="0" height="10" style="fill: #f00">
+        <animate
+          id="a61"
+          attributeType="XML"
+          attributeName="width"
+          to="20"
+          dur="1s"
+          end="a61.end"
+          fill="freeze"
+          repeatCount="indefinite"
+        />
+      </rect>
     </svg>
     <script src="../utils/fullCoord.js" type="module"></script>
   </body>
