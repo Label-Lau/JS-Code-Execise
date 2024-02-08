@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 基本用法 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <circle cx="30" cy="30" r="10" style="fill: #f00">
+        <animate
+          attributeType="XML"
+          attributeName="cx"
+          from="30"
+          to="60"
+          dur="1s"
+          repeatCount="1"
+          fill="freeze"
+        />
+      </circle>
+    </svg>
+
+    <!-- id 引用 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <circle cx="30" cy="30" r="10" fill="#f00" />
+      <circle id="c2" cx="30" cy="60" r="10" fill="#00f" />
+      <animate
+        href="#c2"
+        attributeType="XML"
+        attributeName="cx"
+        from="30"
+        to="60"
+        dur="1s"
+        repeatCount="1"
+        fill="freeze"
+      />
+    </svg>
+
+    <!-- 使用多个动画标签，控制多个属性的动画变化 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <circle cx="30" cy="30" r="10" style="fill: #f00">
+        <animate
+          attributeType="XML"
+          attributeName="cx"
+          from="30"
+          to="60"
+          dur="1s"
+          repeatCount="1"
+          fill="freeze"
+        />
+        <animate
+          attributeType="XML"
+          attributeName="cy"
+          from="30"
+          to="60"
+          dur="1s"
+          repeatCount="1"
+          fill="freeze"
+        />
+      </circle>
+    </svg>
+    <!-- begin/end 控制动画起始 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <circle cx="30" cy="30" r="10" fill="#f00">
+        <animate
+          attributeType="XML"
+          attributeName="cx"
+          from="30"
+          to="60"
+          dur="1s"
+          begin="btn2.mouseover"
+        />
+      </circle>
+      <g id="btn2" style="cursor: pointer">
+        <rect
+          x="40"
+          y="60"
+          width="20"
+          height="10"
+          rx="5"
+          ry="5"
+          style="fill: #ccc"
+        />
+        <text x="50" y="67" font-size="6" text-anchor="middle">移入</text>
+      </g>
+    </svg>
+    <script src="../utils/fullCoord.js" type="module"></script>
+  </body>
+</html>
