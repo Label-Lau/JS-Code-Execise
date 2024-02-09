@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- motion路径动画 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <path
+        d="M20 50 A30 30 0 0 1 80 50A30 30 0 0 1 20 50"
+        fill="none"
+        stroke="#00f"
+      />
+      <circle r="3" fill="#f00" fill-opacity="0.8">
+        <animateMotion
+          path="M20 50 A30 30 0 0 1 80 50A30 30 0 0 1 20 50"
+          dur="2s"
+          begin="0s"
+          fill="freeze"
+        />
+      </circle>
+    </svg>
+    <!-- 直线 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <path d="M0 0 L100 100" fill="none" stroke="#00f" />
+      <circle cx="0" cy="0" r="3" style="fill: #f00" fill-opacity="0.8">
+        <animateMotion
+          path="M0 0 L100 100"
+          dur="2s"
+          fill="freeze"
+        ></animateMotion>
+      </circle>
+    </svg>
+    <!-- 贝塞尔曲线 -->
+    <svg width="400" height="400" viewBox="0 0 100 100">
+      <path d="M0 0 C0 100 100 0 100 100" fill="none" stroke="#00f" />
+      <circle cx="0" cy="0" r="3" fill="#f00" fill-opacity="0.8">
+        <animateMotion
+          path="M0 0 C0 100 100 0 100 100"
+          keyPoints="0;1"
+          keyTimes="0;1"
+          calcMode="spline"
+          keySplines="0 1 1 0"
+          dur="2s"
+          fill="freeze"
+        ></animateMotion>
+      </circle>
+    </svg>
+    <svg width="400" height="400" viewBox="0 0 100 100">
+      <path d="M0 0 C100 0 0 100 100 100" fill="none" stroke="#00f" />
+      <circle cx="0" cy="0" r="3" fill="#f00" fill-opacity="0.8">
+        <animateMotion
+          path="M0 0 C100 0 0 100 100 100"
+          keyPoints="0;1"
+          keyTimes="0;1"
+          calcMode="spline"
+          keySplines="1 0 0 1"
+          dur="2s"
+          fill="freeze"
+        ></animateMotion>
+      </circle>
+    </svg>
+    <!-- mpath -->
+    <svg width="400" height="400" viewBox="0 0 100 100">
+      <path
+        id="d1"
+        d="M20 50 A30 30 0 0 1 80 50 L50 90 Z"
+        fill="none"
+        stroke="#00f"
+      />
+
+      <rect x="0" y="0" width="5" height="5" fill="#f00" fill-opacity="0.8">
+        <animateMotion rotate="auto-reverse" dur="4s" fill="freeze">
+          <mpath href="#d1" />
+        </animateMotion>
+      </rect>
+    </svg>
+    <script src="../utils/fullCoord.js" type="module"></script>
+  </body>
+</html>

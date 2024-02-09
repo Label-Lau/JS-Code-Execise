@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .rect1 {
+        filter: url(#f1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 基本用法 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f1">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+        </filter>
+      </defs>
+      <image
+        xlink:href="../asset/image2.png"
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        filter="url('#f1')"
+      />
+    </svg>
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f2">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+        </filter>
+      </defs>
+      <image
+        xlink:href="../asset/image2.png"
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        filter="url('#f2')"
+      />
+    </svg>
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f3">
+          <feGaussianBlur
+            stdDeviation="3"
+            x="30"
+            y="0"
+            width="50"
+            height="40"
+            result="r3"
+          />
+          <feMerge>
+            <feMergeNode in="SourceGraphic" />
+            <feMergeNode in="r3" />
+          </feMerge>
+        </filter>
+      </defs>
+      <image
+        xlink:href="../asset/image2.png"
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        filter="url('#f3')"
+      />
+    </svg>
+    <script src="../utils/fullCoord.js" type="module"></script>
+  </body>
+</html>
