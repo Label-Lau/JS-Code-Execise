@@ -19,10 +19,10 @@
             in="SourceGraphic"
             type="matrix"
             values="
-              -1 3 -1 0 0 
-               0 1  0 0 0
-               0 0  1 0 0
-               0 0  0 1 0"
+            -1 3 -1 0 0 
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 1 0"
           />
         </filter>
       </defs>
@@ -36,7 +36,84 @@
         width="60"
       />
       <image
-      href="../asset/image5.jpg"
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+        transform="translate(0,50)"
+      />
+    </svg>
+
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f5">
+          <feColorMatrix in="SourceGraphic" type="saturate" values="1.5" />
+        </filter>
+      </defs>
+
+      <image
+        filter="url(#f5)"
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+      />
+      <image
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+        transform="translate(0,50)"
+      />
+    </svg>
+
+    <!-- hueRotate 调整色相盘，改变色调 ， 0-360° -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f6">
+          <feColorMatrix in="SourceGraphic" type="hueRotate" values="180" />
+        </filter>
+      </defs>
+
+      <image
+        filter="url(#f6)"
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+      />
+      <image
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+        transform="translate(0,50)"
+      />
+    </svg>
+
+    <!-- luminanceToAlpha 根据图像自身亮度转换成透明度。 越亮越可见， 越暗越透明 -->
+    <svg viewBox="0 0 100 100" id="svg" width="400" height="400">
+      <defs>
+        <filter id="f7">
+          <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" />
+        </filter>
+      </defs>
+
+      <image
+        filter="url(#f7)"
+        href="../asset/image5.jpg"
+        x="0"
+        y="0"
+        height="60"
+        width="60"
+      />
+      <image
+        href="../asset/image5.jpg"
         x="0"
         y="0"
         height="60"
