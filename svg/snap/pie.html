@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      svg {
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="./snap.svg.js"></script>
+    <script>
+      const data = [
+        { text: "阿里", count: 100 },
+        { text: "京东", count: 150 },
+        { text: "字节", count: 90 },
+        { text: "腾讯", count: 120 },
+        { text: "百度", count: 200 },
+      ];
+
+      const svg = Snap();
+      svg.attr({
+        width: 400,
+        height: 400,
+        viewBox: "0 0 100 100",
+      });
+
+      const r1 = 20;
+      const r2 = 40;
+      const r3 = 25;
+      const origin = { x: 50, y: 50 };
+      const colors = ["#5470c6", "#91cc75", "#fac858", "#ee6666", "#73c0de"];
+      const sum = data.reduce((prev, item) => prev + item.count, 0);
+      const degList = data.map((item) => (item.count / sum) * 360);
+      let num = 1;
+
+      function draw() {
+        const degs = degList.map((deg) => (num * deg) / 40);
+        svg.clear();
+        degs.forEach((deg, index, self) => {
+          let startDeg =
+            index === 0
+              ? 0
+              : self.slice(0, index).reduce((prev, item) => prev + item, 0);
+          let lastDeg = startDeg + degs[index];
+          let f = lastDeg - startDeg > 180 ? 1 : 0;
+          let start1 = {
+            x: origin.x + Snap.sin(startDeg) * r1,
+            y: origin.y - Snap.cos(startDeg) * r1,
+          };
+          let start2 = {
+            x: origin.x + Snap.sin(startDeg) * r2,
+            y: origin.y - Snap.cos(startDeg) * r2,
+          };
+          let end1 = {
+            x: origin.x + Snap.sin(lastDeg) * r1,
+            y: origin.y - Snap.cos(lastDeg) * r1,
+          };
+          let end2 = {
+            x: origin.x + Snap.sin(lastDeg) * r2,
+            y: origin.y - Snap.cos(lastDeg) * r2,
+          };
+          //
+          let d = `M${start1.x} ${start1.y} A${r1} ${r1} 0 ${f} 1 ${end1.x} ${end1.y}`;
+          d += `L${end2.x} ${end2.y}`;
+          d += `A${r2} ${r2} 0 ${f} 0 ${start2.x} ${start2.y} Z`;
+
+          let path = svg.path(d);
+          path.attr({
+            fill: colors[index],
+            index,
+          });
+
+          // 增加一个弧度路径，显示图表文字
+          const part = (lastDeg - startDeg) / 4;
+          startDeg += part;
+          lastDeg -= part;
+          let start = {
+            x: origin.x + Snap.sin(startDeg) * r3,
+            y: origin.y - Snap.cos(startDeg) * r3,
+          };
+          let end = {
+            x: origin.x + Snap.sin(lastDeg) * r3,
+            y: origin.y - Snap.cos(lastDeg) * r3,
+          };
+          path = svg.path(
+            `M${start.x} ${start.y} A${r3} ${r3} 0 0 1 ${end.x} ${end.y}`
+          );
+          path.attr({
+            fill: "none",
+            stroke: "none",
+          });
+          const text = svg.text(0, 0, data[index].text);
+          text.attr({
+            textpath: path,
+            fontSize: 4,
+            textLength: path.getTotalLength(),
+          });
+        });
+        if (num < 40) {
+          num++;
+          requestAnimationFrame(draw);
+        }
+      }
+
+      requestAnimationFrame(draw);
+      let text = null;
+      svg.mouseover((e) => {
+        if (e.target.tagName === "path") {
+          const path = Snap(e.target);
+          const index = path.attr("index");
+          const obj = data[index];
+
+          text = svg.text(50, 55, obj.text);
+          text.attr({
+            fontSize: 10,
+            textAnchor: "middle",
+            textLength: 20,
+          });
+
+          path.mouseout((e) => {
+            text.remove();
+          });
+        }
+      });
+    </script>
+    <script src="../utils/fullCoord.js" type="module"></script>
+  </body>
+</html>

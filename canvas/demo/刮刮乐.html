@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid #ccc;
+        margin-right: 5px;
+        position: absolute;
+      }
+      .content {
+        width: 300px;
+        height: 200px;
+        background-color: #fdd;
+        text-align: center;
+        line-height: 200px;
+        font-size: 66px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">一等奖</div>
+    <script>
+      (() => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 300;
+        canvas.height = 200;
+        document.body.append(canvas);
+        const ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.fillStyle = "#ccc";
+        ctx.fillRect(0, 0, 300, 200);
+
+        ctx.globalCompositeOperation = "destination-out";
+
+        ctx.beginPath();
+        ctx.lineWidth = 20;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        canvas.onmousedown = function (e) {
+          ctx.moveTo(e.offsetX, e.offsetY);
+          canvas.onmousemove = function (e) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            canvas.onmouseup = canvas.onmouseout = function () {
+              canvas.onmousemove = null;
+              canvas.onmouseout = null;
+              canvas.onmouseup = null;
+            };
+          };
+        };
+      })();
+    </script>
+  </body>
+</html>

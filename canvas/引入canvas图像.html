@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <button style="display: block">download</button>
+    <script>
+      let canvas1;
+      (() => {
+        canvas1 = document.createElement("canvas");
+        document.body.append(canvas1);
+        canvas1.width = 400;
+        canvas1.height = 400;
+
+        const ctx = canvas1.getContext("2d");
+        for (let i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.arc(100, 100, 20 * i, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.moveTo(0, 100);
+        ctx.lineTo(200, 100);
+      })();
+
+      (() => {
+        const canvas = document.createElement("canvas");
+        document.body.append(canvas);
+        canvas.width = 400;
+        canvas.height = 400;
+
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.drawImage(canvas1, 0, 0, 100, 100, 150, 150, 100, 100);
+      })();
+
+      const btn = document.querySelector("button");
+      btn.addEventListener("click", () => {
+        const url = canvas1.toDataURL();
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = "canvas 画布";
+        a.click();
+        a = null;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      (() => {
+        const canvas = document.createElement("canvas");
+        document.body.append(canvas);
+        canvas.width = 400;
+        canvas.height = 400;
+
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(100, 100, 50, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(300, 100, 50, 0, Math.PI, true);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(100, 300, 50, Math.PI / 2, Math.PI, true);
+        ctx.stroke();
+      })();
+
+      (() => {
+        const canvas = document.createElement("canvas");
+        document.body.append(canvas);
+        canvas.width = 400;
+        canvas.height = 400;
+
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.lineTo(100, 300);
+        ctx.lineTo(300, 300);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(200, 200, 100, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#00f";
+        ctx.moveTo(100, 200);
+        ctx.arcTo(100, 300, 300, 300, 100);
+        ctx.stroke()
+      })();
+    </script>
+  </body>
+</html>

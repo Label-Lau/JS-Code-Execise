@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let bgCanvas;
+      (() => {
+        bgCanvas = document.createElement("canvas");
+        document.body.append(bgCanvas);
+        bgCanvas.width = 30;
+        bgCanvas.height = 30;
+
+        const ctx = bgCanvas.getContext("2d");
+
+        ctx.moveTo(0, 15);
+        ctx.lineTo(15, 0);
+        ctx.lineTo(30, 15);
+        ctx.lineTo(15, 30);
+        ctx.closePath();
+        ctx.fill();
+      })();
+
+      (() => {
+        const canvas = document.createElement("canvas");
+        document.body.append(canvas);
+        canvas.width = 400;
+        canvas.height = 400;
+
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.src = "./assets/2.jpg";
+        img.width = 30;
+        img.onload = function () {
+          const pattern = ctx.createPattern(img, "repeat");
+          const pattern2 = ctx.createPattern(bgCanvas, "repeat");
+          ctx.lineWidth = 30;
+          ctx.strokeStyle = pattern2;
+          ctx.fillStyle = pattern;
+          ctx.rect(15, 15, 330, 330);
+          ctx.stroke();
+          ctx.fill();
+        };
+      })();
+    </script>
+  </body>
+</html>

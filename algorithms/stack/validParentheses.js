@@ -2,10 +2,10 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function (s) {
+export default function isValid(s) {
   if (!s?.length) return;
   const stack = [];
-  for (let i = 0; i < s.length; i++) {
+  for (let i = 0; i < s.length; i += 1) {
     const letter = s[i];
     if (["(", "[", "{"].includes(letter)) {
       stack.push(letter);
@@ -17,7 +17,7 @@ var isValid = function (s) {
     }
   }
   return stack.length === 0;
-};
+}
 
 console.log(isValid("{}()[]"));
 console.log(isValid("{}{()}[]"));
